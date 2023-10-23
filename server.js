@@ -1,19 +1,23 @@
 const http = require('http')
+const fs = require('fs')
 
 const server = http.createServer((request, response) => {
   console.log('request made')
 
   // ** set header content type
-  // ** text/plain
-  // response.setHeader('Content-Type', 'text/plain')
-  // response.write('hello ninjas')
-  // response.end()
-
-  // ** text/html
   response.setHeader('Content-Type', 'text/html')
-  response.write('<head><link rel="stylesheet" href=""></head>')
-  response.write('<h1>hello ninjas</h1>')
-  response.end()
+
+  // send a html file
+  fs.readFile('./views/index.html', (error, data) => {
+    if (error) {
+      console.log(error)
+    } else {
+      // response.write(data)
+      // response.end()
+      response.end(data)
+    }
+  })
+
 })
 
 server.listen(3000, 'localhost', () => {
