@@ -10,8 +10,10 @@ app.set('view engine', 'ejs')
 // listen for requests
 app.listen(3000)
 
+// middleware & static files
+app.use(express.static('public')) // Express makes files in the "public" folder accessible to the browser
+
 app.use(morgan('dev'))
-// app.use(morgan('tiny'))
 
 app.get('/', (req, res) => {
   const blogs = [
