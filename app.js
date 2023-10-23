@@ -10,18 +10,35 @@ app.set('view engine', 'ejs')
 app.listen(3000)
 
 app.get('/', (req, res) => {
-  res.render('index') // express sets default root directory to the "views" folder in the first level
+  const blogs = [
+    {
+      title: 'Yoshi finds eggs',
+      snippet: 'Lorem ipsum dolor sit amet consectetur'
+    },
+    {
+      title: 'Mario finds starts',
+      snippet: 'Lorem ipsum dolor sit amet consectetur'
+    },
+    {
+      title: 'How to defeat mushrooms',
+      snippet: 'Lorem ipsum dolor sit amet consectetur'
+    }
+  ]
+  res.render('index', {
+    title: 'Home',
+    blogs
+  })
 })
 
 app.get('/about', (req, res) => {
-  res.render('about')
+  res.render('about', { title: 'About' })
 })
 
 app.get('/blogs/create', (req, res) => {
-  res.render('create')
+  res.render('create', { title: 'Create a new Blog' })
 })
 
 // 404 page
 app.use((req, res) => {
-  res.status(404).render('404')
+  res.status(404).render('404', { title: '404' })
 })
